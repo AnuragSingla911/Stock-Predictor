@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+  
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test
+    redis:
+      host: localhost
+      port: 6379
+  
+  mail:
+    host: localhost
+    port: 1025
+
+app:
+  alphavantage:
+    base-url: https://test.com
+    api-key: test-key
+  llm:
+    base-url: https://test-llm.com
+    api-key: test-key
+    model: test-model
+  pipeline:
+    api-key: test-pipeline-key
+    auto-start: false
+    default-symbols: AAPL
+    test-recipient: test@test.com

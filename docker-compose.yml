@@ -1,0 +1,86 @@
+services:
+  app:
+    build: .
+    container_name: stock-predictor-app
+    ports:
+      - '8080:8080'
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://stock-postgres:5432/stock_market
+      - SPRING_DATA_MONGODB_URI=mongodb://root:secret@stock-mongodb:27017/stock_rationale?authSource=admin
+      - SPRING_DATA_REDIS_HOST=stock-redis
+      - SPRING_MAIL_HOST=mailpit
+      - SPRING_MAIL_PORT=1025
+      - ALPHAVANTAGE_API_KEY=${ALPHAVANTAGE_API_KEY}
+      - LLM_API_KEY=${LLM_API_KEY}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mongodb:
+        condition: service_started
+      redis:
+        condition: service_started
+      mailpit:
+        condition: service_started
+    networks:
+      - stock-network
+
+  mailpit:
+    image: axllent/mailpit:v1.20.6
+    container_name: stock-mailpit
+    ports:
+      - '1025:1025'  # SMTP
+      - '8025:8025'  # Web UI
+    networks:
+      - stock-network
+
+  mongodb:
+    image: 'mongo:7.0'
+    container_name: stock-mongodb
+    environment:
+      - 'MONGO_INITDB_DATABASE=stock_rationale'
+      - 'MONGO_INITDB_ROOT_PASSWORD=secret'
+      - 'MONGO_INITDB_ROOT_USERNAME=root'
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - stock-network
+
+  postgres:
+    image: 'postgres:16'
+    container_name: stock-postgres
+    environment:
+      - 'POSTGRES_DB=stock_market'
+      - 'POSTGRES_PASSWORD=secret'
+      - 'POSTGRES_USER=stock_user'
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U stock_user -d stock_market"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - stock-network
+
+  redis:
+    image: 'redis:7.2'
+    container_name: stock-redis
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    networks:
+      - stock-network
+
+volumes:
+  mongodb_data:
+  postgres_data:
+  redis_data:
+
+networks:
+  stock-network:
+    driver: bridge

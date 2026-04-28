@@ -1,0 +1,15 @@
+Provide a concise, data-driven rationale for the stock {{symbol}}.
+Focus on the following daily metrics:
+- Open: {{open}}
+- High: {{high}}
+- Low: {{low}}
+- Close: {{close}}
+- Volume: {{volume}}
+
+### Guidelines:
+1. Use bullet points for scannability.
+2. Highlight key price action (e.g., "Opened at {{open}} and showed strength reaching a high of {{high}}").
+3. Mention volume significance if applicable.
+4. Maintain a professional, objective tone.
+5. Do NOT hallucinate any numbers not provided above.
+6. Ensure the final summary is under 100 words.

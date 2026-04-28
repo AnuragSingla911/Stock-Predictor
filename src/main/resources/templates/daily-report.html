@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Top 5 AI Picks</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0b0f19;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, #131a2a, #0b0f19);
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 1px solid #1f2937;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: #4facfe;
+            letter-spacing: 1px;
+        }
+        .header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #9ca3af;
+        }
+        .stock-card {
+            background-color: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .ticker {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+        .badge {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 8px;
+        }
+        .confidence-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #9ca3af;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+        .confidence-value {
+            color: #10b981;
+            font-weight: 700;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background-color: #374151;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #10b981;
+            border-radius: 3px;
+        }
+        .rationale {
+            font-size: 14px;
+            color: #d1d5db;
+            line-height: 1.5;
+            margin: 0;
+            border-left: 2px solid #3b82f6;
+            padding-left: 12px;
+        }
+        .warning-card {
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+            color: #f87171;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #1f2937;
+            font-size: 12px;
+            color: #6b7280;
+        }
+        .disclaimer {
+            font-size: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>Daily Top 5 AI Picks</h1>
+            <p th:text="'Pre-Market Intelligence &bull; ' + ${report.date}">Pre-Market Intelligence &bull; Oct 24, 2026</p>
+        </div>
+
+        <div th:if="${report.lowConfidenceWarning}" class="warning-card">
+            <strong>LOW CONFIDENCE WARNING</strong>
+            <p>Market conditions are currently highly volatile. AI signals are currently suppressed for risk management.</p>
+        </div>
+
+        <div th:each="prediction : ${report.predictions}" class="stock-card">
+            <div class="ticker">
+                <span th:text="${prediction.symbol}">AAPL</span>
+                <span class="badge" th:text="${prediction.direction}">LONG</span>
+            </div>
+            <div class="confidence-container">
+                <div class="confidence-label">
+                    <span>AI Confidence Score</span>
+                    <span class="confidence-value" th:text="${prediction.confidence}">88%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" th:style="'width: ' + ${prediction.confidence}"></div>
+                </div>
+            </div>
+            <p class="rationale" th:text="${prediction.rationale}">Rationale goes here...</p>
+        </div>
+
+        <div class="footer">
+            <p>Generated automatically by the Stock Market Predictor AI Pipeline.</p>
+            <p class="disclaimer">Disclaimer: For informational purposes only. Not registered financial advice. Do your own research.</p>
+        </div>
+    </div>
+</body>
+</html>

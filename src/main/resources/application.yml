@@ -1,0 +1,67 @@
+spring:
+  application:
+    name: stock-market-predictor
+
+  # PostgreSQL Configuration
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/stock_market}
+    username: stock_user
+    password: secret
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  # MongoDB Configuration
+  data:
+    mongodb:
+      uri: ${SPRING_DATA_MONGODB_URI:mongodb://root:secret@localhost:27017/stock_rationale?authSource=admin}
+    
+    # Redis Configuration
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:localhost}
+      port: 6379
+
+  # Docker Compose integration (Disabled when running inside Docker itself)
+  docker:
+    compose:
+      enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+
+app:
+  alphavantage:
+    base-url: https://www.alphavantage.co
+    api-key: ${ALPHAVANTAGE_API_KEY:EMD4R2D2R65FTTL2}
+  pipeline:
+    api-key: ${PIPELINE_API_KEY:secret}
+    auto-start: ${PIPELINE_AUTO_START:false}
+    default-symbols: ${PIPELINE_DEFAULT_SYMBOLS:AAPL,MSFT,NVDA,TSLA,GOOGL}
+    test-recipient: ${PIPELINE_TEST_RECIPIENT:user@example.com}
+  llm:
+    base-url: ${LLM_BASE_URL:https://api.openai.com}
+    api-key: ${LLM_API_KEY:none}
+    model: ${LLM_MODEL:gpt-4-turbo}
+
+spring.mail:
+  host: ${MAIL_HOST:localhost}
+  port: ${MAIL_PORT:1025}
+  username: ${MAIL_USERNAME:none}
+  password: ${MAIL_PASSWORD:none}
+  properties:
+    mail:
+      smtp:
+        auth: true
+        starttls:
+          enable: true

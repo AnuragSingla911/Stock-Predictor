@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Top 5 AI Picks</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0b0f19;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .email-container {
+            max-width: 600px;
+            width: 100%;
+            background: linear-gradient(145deg, #131a2a, #0b0f19);
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 1px solid #1f2937;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            background: -webkit-linear-gradient(#00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+        .header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #9ca3af;
+        }
+        .stock-card {
+            background-color: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+        .stock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .ticker {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .badge {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .confidence-container {
+            margin-bottom: 12px;
+        }
+        .confidence-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #9ca3af;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .confidence-value {
+            color: #10b981;
+            font-weight: 700;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background-color: #374151;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #34d399);
+            border-radius: 3px;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+        .rationale {
+            font-size: 14px;
+            color: #d1d5db;
+            line-height: 1.5;
+            margin: 0;
+            border-left: 2px solid #3b82f6;
+            padding-left: 12px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #1f2937;
+            font-size: 12px;
+            color: #6b7280;
+        }
+        .disclaimer {
+            font-size: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>Daily Top 5 AI Picks</h1>
+            <p>Pre-Market Intelligence &bull; Oct 24, 2026</p>
+        </div>
+
+        <!-- Stock 1 -->
+        <div class="stock-card">
+            <div class="stock-header">
+                <div class="ticker">AAPL <span class="badge">LONG</span></div>
+            </div>
+            <div class="confidence-container">
+                <div class="confidence-label">
+                    <span>AI Confidence Score</span>
+                    <span class="confidence-value">88%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 88%;"></div>
+                </div>
+            </div>
+            <p class="rationale">Strong momentum in services revenue and an upcoming hardware cycle historically correlate with a breakout from current consolidation levels.</p>
+        </div>
+
+        <!-- Stock 2 -->
+        <div class="stock-card">
+            <div class="stock-header">
+                <div class="ticker">NVDA <span class="badge">LONG</span></div>
+            </div>
+            <div class="confidence-container">
+                <div class="confidence-label">
+                    <span>AI Confidence Score</span>
+                    <span class="confidence-value">82%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 82%;"></div>
+                </div>
+            </div>
+            <p class="rationale">Sustained institutional accumulation and supply chain data indicates next-quarter earnings will exceed current street estimates.</p>
+        </div>
+
+        <!-- Stock 3 -->
+        <div class="stock-card">
+            <div class="stock-header">
+                <div class="ticker">CRWD <span class="badge">LONG</span></div>
+            </div>
+            <div class="confidence-container">
+                <div class="confidence-label">
+                    <span>AI Confidence Score</span>
+                    <span class="confidence-value">79%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 79%;"></div>
+                </div>
+            </div>
+            <p class="rationale">Recent macroeconomic data combined with sector rotation patterns favor high-margin cybersecurity enterprise plays this week.</p>
+        </div>
+
+        <div class="footer">
+            <p>Generated automatically by the Stock Market Predictor AI Pipeline.</p>
+            <p class="disclaimer">Disclaimer: For informational purposes only. Not registered financial advice. Do your own research.</p>
+        </div>
+    </div>
+</body>
+</html>
